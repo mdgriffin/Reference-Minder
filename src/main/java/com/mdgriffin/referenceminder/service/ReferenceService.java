@@ -11,6 +11,8 @@ public interface ReferenceService {
 
     Reference saveReference (Reference reference);
 
-    Optional<Reference> findById (String id);
+    void deleteReference (String referenceId);
+
+    Optional<Reference> findById (String referenceId);
 
 }

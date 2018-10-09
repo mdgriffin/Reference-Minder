@@ -25,6 +25,11 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
+    public void deleteReference(String referenceId) {
+        referenceRepository.deleteById(referenceId);
+    }
+
+    @Override
     public Optional<Reference> findById(String id) {
         return referenceRepository.findById(id);
     }
