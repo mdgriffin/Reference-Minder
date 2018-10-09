@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReferenceServiceImpl implements ReferenceService {
@@ -16,6 +17,16 @@ public class ReferenceServiceImpl implements ReferenceService {
     @Override
     public List<Reference> getReferences() {
         return referenceRepository.findAll();
+    }
+
+    @Override
+    public Reference saveReference(Reference reference) {
+        return referenceRepository.save(reference);
+    }
+
+    @Override
+    public Optional<Reference> findById(String id) {
+        return referenceRepository.findById(id);
     }
 
 }
