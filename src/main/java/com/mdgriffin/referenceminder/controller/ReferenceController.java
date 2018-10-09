@@ -43,4 +43,9 @@ public class ReferenceController {
         }
     }
 
+    @PutMapping("/references/{referenceId}")
+    public Reference updateReference (@RequestBody @Valid Reference reference) {
+        return referenceService.updateReference(reference);
+    }
+
 }

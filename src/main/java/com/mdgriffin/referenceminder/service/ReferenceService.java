@@ -15,4 +15,6 @@ public interface ReferenceService {
 
     Optional<Reference> findById (String referenceId);
 
+    Reference updateReference (Reference reference);
+
 }
