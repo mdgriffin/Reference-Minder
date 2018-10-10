@@ -13,4 +13,4 @@ let router = createRouter()
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app2')
+}).$mount('#app')

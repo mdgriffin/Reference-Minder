@@ -4,37 +4,13 @@ $primary_colour: #041f6e;
 $secondary_color: #f19d02;
 
  body {
-    background: #fff;
+    background: #f4f4f4;
     background-size: 450px;
     font-family: 'Roboto Mono', monospace;
-    color: #fff
-}
-
-.logo {
-    color: #fff;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    text-align: center;
-}
-
-.logo i {
-    color: $secondary_color;
-    margin: 0 3px;
-}
-
-.logo i.small {
-    font-size: 0.5em;
-} 
-
-.logo i.medium {
-    font-size: 0.7em;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: 'Rubik', sans-serif
-}
-
-a {
-    color: #fff;
 }
 
 .container {
@@ -44,10 +20,10 @@ a {
 }
 
 .box {
-    background: $primary_colour;
+    background: #fff;
     border-radius: 10px;
     padding: 2em;
-    box-shadow:0px 5px 18px -1px rgba(0, 0, 0, 0.2);
+    border: 1px solid #eaeaea;
     margin: 2em 0;
 }
 
