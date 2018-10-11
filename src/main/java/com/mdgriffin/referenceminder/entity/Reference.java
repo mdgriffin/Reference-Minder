@@ -22,7 +22,7 @@ public class Reference {
 
     private PageRange pages;
 
-    private Set<Author> author = new HashSet<>();
+    private Set<Author> authors = new HashSet<>();
 
     Set<Tag> tags = new HashSet<>();
 
@@ -76,12 +76,12 @@ public class Reference {
         this.pages = pages;
     }
 
-    public Set<Author> getAuthor() {
-        return author;
+    public Set<Author> getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(Set<Author> author) {
-        this.author = author;
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 
     public Set<Tag> getTags() {
