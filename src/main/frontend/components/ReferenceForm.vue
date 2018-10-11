@@ -9,7 +9,7 @@
             <label class="form-label">Reference Types</label>
             <select v-model="formReference.type">
                 <option disabled value="">Please select one</option>
-                <option v-for="(typeKey, typeVal) in referenceTypes" :key="typeKey">{{typeKey}}</option>
+                <option v-for="(typeKey, typeVal) in referenceTypes" :value="typeVal" :key="typeKey">{{typeKey}}</option>
             </select>
         </div>
         <h3>Authors</h3>
