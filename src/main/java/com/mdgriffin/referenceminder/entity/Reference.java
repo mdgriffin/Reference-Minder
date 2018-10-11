@@ -2,7 +2,9 @@ package com.mdgriffin.referenceminder.entity;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Reference {
@@ -22,7 +24,7 @@ public class Reference {
 
     private Set<Author> author = new HashSet<>();
 
-    Set<String> tags = new HashSet<>();
+    Set<Tag> tags = new HashSet<>();
 
     public Reference () {}
 
@@ -82,11 +84,11 @@ public class Reference {
         this.author = author;
     }
 
-    public Set<String> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(Set<String> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 }

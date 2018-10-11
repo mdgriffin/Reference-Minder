@@ -18,6 +18,8 @@ export default {
         return {
             emptyReference: {
                 title: "",
+                authors: [],
+                tags: [],
                 pages: {
                     from: 20,
                     to: 25
@@ -41,7 +43,7 @@ export default {
             console.log(reference)
             saveReference(reference)
                 .then(res => {
-                    console.log(res)
+                    console.log(JSON.stringify(res))
                     console.log('On Save Reference')
                 })
         }
