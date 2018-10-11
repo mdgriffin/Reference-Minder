@@ -18,6 +18,7 @@ export default {
         return {
             emptyReference: {
                 title: "",
+                type: "",
                 authors: [],
                 tags: [],
                 pages: {

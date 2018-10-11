@@ -5,6 +5,13 @@
             <label class="form-label">Title</label>
             <input type="text" class="form-input" v-model="formReference.title">
         </div>
+        <div class="form-group">
+            <label class="form-label">Reference Types</label>
+            <select v-model="formReference.type">
+                <option disabled value="">Please select one</option>
+                <option v-for="(typeKey, typeVal) in referenceTypes" :key="typeKey">{{typeKey}}</option>
+            </select>
+        </div>
         <h3>Authors</h3>
         <div class="referenceForm-authors">
             <div v-for="(author, authorIndex) in formReference.authors" :key="authorIndex">
@@ -48,6 +55,7 @@
 <script>
 import VueTagsInput from '@johmun/vue-tags-input';
 import Datepicker from 'vuejs-datepicker';
+import {getReferenceTypes} from "../api/reference-types-api";
 
 const dateToReferenceDate = function (date) {
     let obj = {};
@@ -75,6 +83,11 @@ export default {
             date: date,
             dateAccessed: dateAccessed
         }
+    },
+    asyncComputed: {
+       referenceTypes () {
+           return getReferenceTypes();
+       }
     },
     methods: {
         saveReference () {
