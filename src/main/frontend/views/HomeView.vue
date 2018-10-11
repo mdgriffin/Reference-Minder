@@ -24,16 +24,8 @@ export default {
                     from: 20,
                     to: 25
                 },
-                date: {
-                    day: 1,
-                    month: 2,
-                    year: 3
-                },
-                dateAccessed: {
-                    day: 1,
-                    month: 2,
-                    year: 3
-                }
+                date: null,
+                dateAccessed: null
             }
         }
     },

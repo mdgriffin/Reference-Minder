@@ -3,59 +3,41 @@
         <h2>Reference Form</h2>
         <div class="form-group">
             <label class="form-label">Title</label>
-            <input type="text" class="form-input" v-model="reference.title">
+            <input type="text" class="form-input" v-model="formReference.title">
         </div>
         <h3>Authors</h3>
         <div class="referenceForm-authors">
-            <div v-for="(author, authorIndex) in reference.authors" :key="authorIndex">
+            <div v-for="(author, authorIndex) in formReference.authors" :key="authorIndex">
                 <div class="form-group">
-                    <label class="form-label">Author {{authorIndex}} Name:</label>
-                    <input type="text" class="form-input" v-model="reference.authors[authorIndex].name">
-                    <button @click="removeAuthor(authorIndex + 1)"><i class="fas fa-times"></i></button>
+                    <label class="form-label">Author {{authorIndex + 1}} Name:</label>
+                    <input type="text" class="form-input" v-model="formReference.authors[authorIndex].name">
+                    <button @click="removeAuthor(authorIndex)"><i class="fas fa-times"></i></button>
                 </div>
             </div>
             <button @click="addAuthor">Add Author <i class="fas fa-plus"></i></button>
         </div>
-        <h3>Date</h3>
         <div class="form-group">
-            <label class="form-label">Day</label>
-            <input type="text" class="form-input" v-model="reference.date.day">
+            <label class="form-label">Date</label>
+            <datepicker v-model="date"></datepicker>
         </div>
         <div class="form-group">
-            <label class="form-label">Month</label>
-            <input type="text" class="form-input" v-model="reference.date.month">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Year</label>
-            <input type="text" class="form-input" v-model="reference.date.year">
-        </div>
-        <h3>Date Accessed</h3>
-        <div class="form-group">
-            <label class="form-label">Day</label>
-            <input type="text" class="form-input" v-model="reference.dateAccessed.day">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Month</label>
-            <input type="text" class="form-input" v-model="reference.dateAccessed.month">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Year</label>
-            <input type="text" class="form-input" v-model="reference.dateAccessed.year">
+            <label class="form-label">Date Accessed</label>
+            <datepicker v-model="dateAccessed"></datepicker>
         </div>
         <h3>Page Range</h3>
         <div class="form-group">
             <label class="form-label">Page From</label>
-            <input type="text" class="form-input" v-model="reference.pages.from">
+            <input type="text" class="form-input" v-model="formReference.pages.from">
         </div>
         <div class="form-group">
             <label class="form-label">Page To</label>
-            <input type="text" class="form-input" v-model="reference.pages.to">
+            <input type="text" class="form-input" v-model="formReference.pages.to">
         </div>
         <div class="form-group">
             <label class="form-label">Tags</label>
             <vue-tags-input
                 v-model="tag"
-                :tags="reference.tags"
+                :tags="formReference.tags"
                 @tags-changed="onTagsChanged"
             />
         </div>
@@ -65,29 +47,63 @@
 
 <script>
 import VueTagsInput from '@johmun/vue-tags-input';
+import Datepicker from 'vuejs-datepicker';
+
+const dateToReferenceDate = function (date) {
+    let obj = {};
+
+    obj.year = date.getFullYear();
+    obj.month = date.getMonth();
+    obj.day = date.getDate();
+
+    return obj;
+}
 
 export default {
     props: ['reference'],
     components: {
         VueTagsInput,
+        Datepicker
     },
     data () {
+        let date = this.reference.date? new Date(this.reference.date.year, this.reference.date.month, this.reference.date.day) : new Date();
+        let dateAccessed = this.reference.dateAccessed? new Date(this.reference.dateAccessed.year, this.reference.dateAccessed.month, this.reference.dateAccessed.day) : new Date();
+
         return {
-            tag: ''
+            tag: '',
+            formReference: JSON.parse(JSON.stringify(this.reference)),
+            date: date,
+            dateAccessed: dateAccessed
         }
     },
     methods: {
         saveReference () {
-            this.$emit('save', this.reference)
+            if (!this.formReference.date) {
+                this.formReference.date = dateToReferenceDate(new Date());
+            }
+
+            if (!this.formReference.dateAccessed) {
+                this.formReference.dateAccessed = dateToReferenceDate(new Date());
+            }
+
+            this.$emit('save', this.formReference)
         },
         addAuthor () {
-            this.reference.authors.push({'name': ''})
+            this.formReference.authors.push({'name': ''})
         },
         removeAuthor (authorIndex) {
-            this.reference.authors.splice(authorIndex, 1)
+            this.formReference.authors.splice(authorIndex, 1)
         },
         onTagsChanged (newTags) {
-            this.reference.tags = newTags
+            this.formReference.tags = newTags
+        }
+    },
+    watch: {
+        dateAccessed (newVal) {
+            this.formReference.dateAccessed = dateToReferenceDate(new Date(newVal))
+        },
+        date (newVal, oldVal) {
+            this.formReference.date = dateToReferenceDate(new Date(newVal))
         }
     }
 }
