@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ReferenceForm from '../components/reference-form.vue';
+import ReferenceForm from '../components/ReferenceForm.vue';
 import {saveReference} from "../api/reference-api";
 
 export default {
