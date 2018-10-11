@@ -1,18 +1,22 @@
 <template>
   <div class="home">
     <h1>Home Page</h1>
+    <h2>References</h2>
+    <reference-list :references="references"></reference-list>
     <reference-form :reference="emptyReference" @save="onSaveReference"></reference-form>
   </div>
 </template>
 
 <script>
 import ReferenceForm from '../components/ReferenceForm.vue';
-import {saveReference} from "../api/reference-api";
+import ReferenceList from '../components/ReferenceList.vue';
+import {getReferences, saveReference} from "../api/reference-api";
 
 export default {
     name: 'home-view',
     components: {
-        'reference-form': ReferenceForm
+        'reference-form': ReferenceForm,
+        'reference-list': ReferenceList
     },
     data() {
         return {
@@ -28,6 +32,11 @@ export default {
                 date: null,
                 dateAccessed: null
             }
+        }
+    },
+    asyncComputed: {
+        references () {
+            return getReferences();
         }
     },
     methods: {

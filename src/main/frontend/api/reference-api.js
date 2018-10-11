@@ -1,3 +1,10 @@
+export function getReferences () {
+    return fetch('/api/references')
+        .then(result => {
+            return result.json()
+        })
+}
+
 export function saveReference (reference) {
     return fetch('/api/references', {
         method: 'POST',
