@@ -40,11 +40,17 @@
             <label class="form-label">Page To</label>
             <input type="text" class="form-input" v-model="reference.pages.to">
         </div>
+        <button @click="saveReference">Save</button>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['reference']
+        props: ['reference'],
+        methods: {
+            saveReference () {
+                this.$emit('save', this.reference)
+            }
+        }
     }
 </script>
