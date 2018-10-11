@@ -70,13 +70,7 @@ export default {
     },
     methods: {
         onSaveReference (reference) {
-            console.log('On Reference CB2')
-            console.log(reference)
-            saveReference(reference)
-                .then(res => {
-                    console.log(JSON.stringify(res))
-                    console.log('On Save Reference')
-                })
+            saveReference(reference);
         }
     }
 }
