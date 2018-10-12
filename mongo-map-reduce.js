@@ -8,7 +8,9 @@ db.reference.mapReduce(
         return Array.sum(values);
     },
     {
-        out: 'tags_count'
+        // re-run map reduce
+        query: { ts: { $gt: ISODate(db.getCollection('tag_count').find().sort({'_id': -1}).limit(1).updatedAt)  }},
+        out: 'tag_count'
         //out: {inline: 1}
     }
 )
