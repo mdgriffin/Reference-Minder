@@ -2,10 +2,7 @@ package com.mdgriffin.referenceminder.entity;
 
 import org.springframework.data.annotation.Id;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Reference {
 
@@ -15,6 +12,10 @@ public class Reference {
     private ReferenceType type;
 
     private String title;
+
+    private Date createdAt;
+
+    private Date updatedAt;
 
     private ReferenceDate date;
 
@@ -50,6 +51,22 @@ public class Reference {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public ReferenceDate getDate() {

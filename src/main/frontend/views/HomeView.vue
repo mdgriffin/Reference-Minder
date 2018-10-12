@@ -95,6 +95,8 @@ export default {
     methods: {
         onSaveReference (reference) {
             let self = this;
+            reference.createdAt = new Date();
+            reference.updatedAt = new Date();
             saveReference(reference)
                 .then(res => {
                     self.numReferenceSaves++;
