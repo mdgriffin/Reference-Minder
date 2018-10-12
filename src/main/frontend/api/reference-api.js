@@ -17,3 +17,10 @@ export function saveReference (reference) {
         return result.json()
     })
 }
+
+export function getReferenceTypes () {
+    return fetch('/api/reference-types')
+        .then(result => {
+            return result.json()
+        })
+}

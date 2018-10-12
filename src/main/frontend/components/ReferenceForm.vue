@@ -55,7 +55,7 @@
 <script>
 import VueTagsInput from '@johmun/vue-tags-input';
 import Datepicker from 'vuejs-datepicker';
-import {getReferenceTypes} from "../api/reference-types-api";
+import {getReferenceTypes} from "../api/reference-api";
 
 const dateToReferenceDate = function (date) {
     let obj = {};
