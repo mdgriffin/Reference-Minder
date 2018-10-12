@@ -5,8 +5,8 @@
       <div v-if="referenceRows">
           <data-table :headings="referenceHeadings" :rows="referenceRows"></data-table>
       </div>
-    <reference-list :references="references"></reference-list>
-    <reference-form :reference="emptyReference" @save="onSaveReference"></reference-form>
+    <reference-form-modal :reference="emptyReference" @save="onSaveReference"></reference-form-modal>
+  <button @click="showCreateForm" class="btn btn-large btn-secondary">Add Reference</button>
   </div>
 </template>
 
@@ -14,6 +14,7 @@
 import ReferenceForm from '../components/ReferenceForm.vue';
 import ReferenceList from '../components/ReferenceList.vue';
 import DataTable from '../components/DataTable.vue';
+import ReferenceFormModal from '../components/ReferenceFormModal.vue';
 import {getReferences, saveReference} from "../api/reference-api";
 
 export default {
@@ -21,7 +22,8 @@ export default {
     components: {
         'reference-form': ReferenceForm,
         'reference-list': ReferenceList,
-        'data-table': DataTable
+        'data-table': DataTable,
+        ReferenceFormModal
     },
     data() {
         return {
@@ -86,6 +88,9 @@ export default {
                 .then(res => {
                     self.numReferenceSaves++;
                 })
+        },
+        showCreateForm () {
+            this.$modal.show('reference-form-modal')
         }
     }
 }

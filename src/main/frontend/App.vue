@@ -1,12 +1,6 @@
 <template>
   <div id="app" class="container">
     <div class="box">
-      <nav class="mainNav">
-        <ul class="reset">
-          <li><router-link to="/">Home</router-link></li>
-          <li><router-link to="/references">References</router-link></li>
-        </ul>
-      </nav>
       <transition name="fade" mode="out-in">
         <router-view class="view"></router-view>
       </transition>
