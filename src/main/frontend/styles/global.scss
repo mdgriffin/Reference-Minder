@@ -4,9 +4,16 @@ $primary_colour: #041f6e;
 $secondary_color: #f19d02;
 
  body {
-    background: #f4f4f4;
-    background-size: 450px;
+    background: #fff;
     font-family: 'Roboto Mono', monospace;
+     margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 h1, h2, h3, h4, h5 {
@@ -14,17 +21,21 @@ h1, h2, h3, h4, h5 {
 }
 
 .container {
-    width: 1000px;
-    max-width: 90%;
     margin: 0 auto;
 }
 
-.box {
-    background: #fff;
-    border-radius: 10px;
-    padding: 2em;
-    border: 1px solid #eaeaea;
-    margin: 2em 0;
+.sidebar {
+    width: 15%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: red;
+
+}
+
+.content {
+    margin-left: 15%;
 }
 
 ul.reset {

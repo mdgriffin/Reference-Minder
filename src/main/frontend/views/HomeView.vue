@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Home Page</h1>
     <h2>References</h2>
       <div v-if="referenceRows">
           <data-table :headings="referenceHeadings" :rows="referenceRows"></data-table>

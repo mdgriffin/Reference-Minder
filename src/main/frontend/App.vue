@@ -1,6 +1,9 @@
 <template>
   <div id="app" class="container">
-    <div class="box">
+    <div class="sidebar">
+      <h2>Tags</h2>
+    </div>
+    <div class="content">
       <transition name="fade" mode="out-in">
         <router-view class="view"></router-view>
       </transition>
