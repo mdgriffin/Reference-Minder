@@ -1,11 +1,17 @@
 <template>
-  <div class="home">
-    <h2>References</h2>
-      <div v-if="referenceRows">
-          <data-table :headings="referenceHeadings" :rows="referenceRows"></data-table>
-      </div>
-    <reference-form-modal :reference="emptyReference" @save="onSaveReference"></reference-form-modal>
-  <button @click="showCreateForm" class="btn btn-large btn-secondary">Add Reference</button>
+    <div class="home">
+        <div class="sidebar">
+            <h2>Tags</h2>
+            <tag-list :tags="tags"></tag-list>
+        </div>
+        <div class="content">
+            <h2>References</h2>
+            <div v-if="referenceRows">
+                <data-table :headings="referenceHeadings" :rows="referenceRows"></data-table>
+            </div>
+            <reference-form-modal :reference="emptyReference" @save="onSaveReference"></reference-form-modal>
+            <button @click="showCreateForm" class="btn btn-large btn-secondary">Add Reference</button>
+        </div>
   </div>
 </template>
 
@@ -14,7 +20,8 @@ import ReferenceForm from '../components/ReferenceForm.vue';
 import ReferenceList from '../components/ReferenceList.vue';
 import DataTable from '../components/DataTable.vue';
 import ReferenceFormModal from '../components/ReferenceFormModal.vue';
-import {getReferences, saveReference} from "../api/reference-api";
+import TagList from "../components/TagList.vue";
+import {getReferences, getReferenceTags, saveReference} from "../api/reference-api";
 
 export default {
     name: 'home-view',
@@ -22,7 +29,8 @@ export default {
         'reference-form': ReferenceForm,
         'reference-list': ReferenceList,
         'data-table': DataTable,
-        ReferenceFormModal
+        ReferenceFormModal,
+        TagList
     },
     data() {
         return {
@@ -43,16 +51,14 @@ export default {
         }
     },
     asyncComputed: {
-        /*
-        references: {
+        tags: {
             get () {
-                return getReferences();
+                return getReferenceTags();
             },
             watch () {
                 this.numReferenceSaves;
             }
         },
-        */
         referenceRows: {
             get () {
                 let self = this;

@@ -1,8 +1,5 @@
 <template>
   <div id="app" class="container">
-    <div class="sidebar">
-      <h2>Tags</h2>
-    </div>
     <div class="content">
       <transition name="fade" mode="out-in">
         <router-view class="view"></router-view>
@@ -15,7 +12,7 @@
 import './styles/global.scss'
 
 export default {
-  name: 'main-app'
+    name: 'main-app'
 }
 </script>
 

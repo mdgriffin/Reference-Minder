@@ -24,3 +24,10 @@ export function getReferenceTypes () {
             return result.json()
         })
 }
+
+export function getReferenceTags () {
+    return fetch('/api/tags')
+        .then(result => {
+            return result.json()
+        })
+}
