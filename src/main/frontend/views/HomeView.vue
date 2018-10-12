@@ -38,11 +38,12 @@ export default {
                 date: null,
                 dateAccessed: null
             },
-            referenceHeadings: ['Title', 'Pages From', 'Pages To'],
+            referenceHeadings: ['Title', 'Authors', 'Pages From', 'Pages To', 'Date', 'Date Accessed', 'Type'],
             numReferenceSaves: 0
         }
     },
     asyncComputed: {
+        /*
         references: {
             get () {
                 return getReferences();
@@ -51,22 +52,27 @@ export default {
                 this.numReferenceSaves;
             }
         },
+        */
         referenceRows: {
             get () {
                 let self = this;
                 return new Promise((resolve, reject) => {
                     getReferences().then(references => {
-                        let res = [];
-
-                        references.forEach(reference => {
+                        let res = references.reduce((acc, reference) => {
                             let arr = [];
 
                             arr.push(reference.title);
+                            arr.push(reference.authors.reduce((acc, author) => acc += author.name + ', ', ''));
                             arr.push(reference.pages.from)
                             arr.push(reference.pages.to)
+                            arr.push(new Date(reference.date.year, reference.date.month, reference.date.day).toLocaleDateString("en-IE"))
+                            arr.push(new Date(reference.dateAccessed.year, reference.dateAccessed.month, reference.dateAccessed.day).toLocaleDateString("en-IE"))
+                            arr.push(reference.type? reference.type :  '')
 
-                            res.push(arr)
-                        })
+                            acc.push(arr)
+
+                            return acc
+                        }, [])
 
                         resolve(res)
                     })
