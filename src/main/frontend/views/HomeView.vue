@@ -37,40 +37,55 @@ export default {
                 date: null,
                 dateAccessed: null
             },
-            referenceHeadings: ['Title', 'Pages From', 'Pages To']
+            referenceHeadings: ['Title', 'Pages From', 'Pages To'],
+            numReferenceSaves: 0
         }
     },
     asyncComputed: {
-        references () {
-            return getReferences();
+        references: {
+            get () {
+                return getReferences();
+            },
+            watch () {
+                this.numReferenceSaves;
+            }
         },
-        referenceRows () {
-            let self = this;
-            return new Promise ((resolve, reject) => {
-                getReferences().then(references => {
-                    let res = [];
+        referenceRows: {
+            get () {
+                let self = this;
+                return new Promise((resolve, reject) => {
+                    getReferences().then(references => {
+                        let res = [];
 
-                    references.forEach(reference => {
-                        let arr = [];
+                        references.forEach(reference => {
+                            let arr = [];
 
-                        arr.push(reference.title);
-                        arr.push(reference.pages.from)
-                        arr.push(reference.pages.to)
+                            arr.push(reference.title);
+                            arr.push(reference.pages.from)
+                            arr.push(reference.pages.to)
 
-                        res.push(arr)
+                            res.push(arr)
+                        })
+
+                        resolve(res)
                     })
-
-                    resolve(res)
-                })
-                .catch(err => {
-                    reject(err);
-                })
-            });
+                        .catch(err => {
+                            reject(err);
+                        })
+                });
+            },
+            watch () {
+                this.numReferenceSaves;
+            }
         }
     },
     methods: {
         onSaveReference (reference) {
-            saveReference(reference);
+            let self = this;
+            saveReference(reference)
+                .then(res => {
+                    self.numReferenceSaves++;
+                })
         }
     }
 }
