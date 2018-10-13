@@ -18,6 +18,12 @@ export function saveReference (reference) {
     })
 }
 
+export function deleteReference (referenceId) {
+    return fetch('/api/references/' +referenceId, {
+        method: 'DELETE'
+    });
+}
+
 export function getReferenceTypes () {
     return fetch('/api/reference-types')
         .then(result => {

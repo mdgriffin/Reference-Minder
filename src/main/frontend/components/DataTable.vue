@@ -29,7 +29,7 @@
             <tr v-for="(row, rowIndex) in currentRows">
                 <slot name="before-data" v-bind:rowIndex="rowIndex"></slot>
                 <td v-for="item in row">{{item}}</td>
-                <slot name="after-data" v-bind:rowIndex="rowIndex"></slot>
+                <slot name="after-data" v-bind:rowIndex="rowIndex" v-bind:rowData="row"></slot>
                 </tr>
             </slot>
         </tbody>

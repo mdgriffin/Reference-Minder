@@ -6,8 +6,12 @@
         </div>
         <div class="content">
             <h2>References</h2>
-            <div v-if="referenceRows">
-                <data-table :headings="referenceHeadings" :rows="referenceRows"></data-table>
+            <div v-if="references">
+                <data-table :headings="referenceHeadings" :rows="references | flattenReferences">
+                    <template slot="after-data" slot-scope="{rowIndex}">
+                        <button @click="deleteReference(rowIndex)" class="btn btn-secondary">Delete</button>
+                    </template>
+                </data-table>
             </div>
             <reference-form-modal :reference="emptyReference" @save="onSaveReference"></reference-form-modal>
             <button @click="showCreateForm" class="btn btn-large btn-secondary">Add Reference</button>
@@ -21,7 +25,8 @@ import ReferenceList from '../components/ReferenceList.vue';
 import DataTable from '../components/DataTable.vue';
 import ReferenceFormModal from '../components/ReferenceFormModal.vue';
 import TagList from "../components/TagList.vue";
-import {getReferences, getReferenceTags, saveReference} from "../api/reference-api";
+import {getReferences, getReferenceTags, saveReference, deleteReference} from "../api/reference-api";
+import {flatten} from '../filters/references-filter.js'
 
 export default {
     name: 'home-view',
@@ -50,6 +55,11 @@ export default {
             numReferenceSaves: 0
         }
     },
+    filters: {
+        flattenReferences (references) {
+            return flatten(references);
+        }
+    },
     asyncComputed: {
         tags: {
             get () {
@@ -59,33 +69,9 @@ export default {
                 this.numReferenceSaves;
             }
         },
-        referenceRows: {
+        references: {
             get () {
-                let self = this;
-                return new Promise((resolve, reject) => {
-                    getReferences().then(references => {
-                        let res = references.reduce((acc, reference) => {
-                            let arr = [];
-
-                            arr.push(reference.title);
-                            arr.push(reference.authors.reduce((acc, author) => acc += author.name + ', ', ''));
-                            arr.push(reference.pages.from)
-                            arr.push(reference.pages.to)
-                            arr.push(new Date(reference.date.year, reference.date.month, reference.date.day).toLocaleDateString("en-IE"))
-                            arr.push(new Date(reference.dateAccessed.year, reference.dateAccessed.month, reference.dateAccessed.day).toLocaleDateString("en-IE"))
-                            arr.push(reference.type? reference.type :  '')
-
-                            acc.push(arr)
-
-                            return acc
-                        }, [])
-
-                        resolve(res)
-                    })
-                        .catch(err => {
-                            reject(err);
-                        })
-                });
+                return getReferences();
             },
             watch () {
                 this.numReferenceSaves;
@@ -94,12 +80,20 @@ export default {
     },
     methods: {
         onSaveReference (reference) {
-            let self = this;
             reference.createdAt = new Date();
             reference.updatedAt = new Date();
             saveReference(reference)
                 .then(res => {
-                    self.numReferenceSaves++;
+                    this.numReferenceSaves++;
+                })
+        },
+        deleteReference (rowIndex) {
+            deleteReference(this.references[rowIndex].id)
+                .then(res => {
+                    this.numReferenceSaves++
+                })
+                .catch(err => {
+                    console.log(err)
                 })
         },
         showCreateForm () {
