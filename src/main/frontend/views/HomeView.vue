@@ -9,7 +9,8 @@
             <div v-if="references">
                 <data-table :headings="referenceHeadings" :rows="references | flattenReferences">
                     <template slot="after-data" slot-scope="{rowIndex}">
-                        <button @click="deleteReference(rowIndex)" class="btn btn-secondary">Delete</button>
+                        <button @click="updateReference(rowIndex)" class="btn btn-secondary">Update</button>
+                        <button @click="deleteReference(rowIndex)" class="btn btn-secondary"><i class="fas fa-times"></i></button>
                     </template>
                 </data-table>
             </div>
@@ -98,6 +99,9 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        updateReference (rowIndex) {
+            console.log('show update model for ' + rowIndex)
         },
         showCreateForm () {
             this.$modal.show('new-reference-form')
