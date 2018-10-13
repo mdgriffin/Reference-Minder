@@ -1,5 +1,5 @@
 export function flatten (references) {
-    var res = references.reduce((acc, reference) => {
+    return references.reduce((acc, reference) => {
         let arr = [];
 
         arr.push(reference.title);
@@ -14,6 +14,4 @@ export function flatten (references) {
 
         return acc;
     }, [])
-
-    return res;
 }
