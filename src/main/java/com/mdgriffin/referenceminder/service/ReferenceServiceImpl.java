@@ -5,6 +5,7 @@ import com.mdgriffin.referenceminder.repository.ReferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public class ReferenceServiceImpl implements ReferenceService {
 
     @Override
     public Reference saveReference(Reference reference) {
+        reference.setCreatedAt(new Date());
+        reference.setUpdatedAt(new Date());
         return referenceRepository.save(reference);
     }
 
@@ -36,6 +39,7 @@ public class ReferenceServiceImpl implements ReferenceService {
 
     @Override
     public Reference updateReference(Reference reference) {
+        reference.setUpdatedAt(new Date());
         return referenceRepository.save(reference);
     }
 

@@ -26,7 +26,7 @@ import ReferenceForm from '../components/ReferenceForm.vue';
 import ReferenceList from '../components/ReferenceList.vue';
 import DataTable from '../components/DataTable.vue';
 import TagList from "../components/TagList.vue";
-import {getReferences, getReferenceTags, saveReference, deleteReference} from "../api/reference-api";
+import {getReferences, getReferenceTags, saveReference, deleteReference, updateReference} from "../api/reference-api";
 import {flatten} from '../filters/references-filter.js'
 
 export default {
@@ -68,12 +68,17 @@ export default {
     },
     methods: {
         onSaveReference (reference) {
-            reference.createdAt = new Date();
-            reference.updatedAt = new Date();
-            saveReference(reference)
-                .then(res => {
-                    this.numReferenceSaves++;
-                })
+            if (reference.id) {
+                updateReference(reference)
+                    .then(res => {
+                        this.numReferenceSaves++;
+                    })
+            } else {
+                saveReference(reference)
+                    .then(res => {
+                        this.numReferenceSaves++;
+                    })
+            }
         },
         deleteReference (rowIndex) {
             deleteReference(this.references[rowIndex].id)

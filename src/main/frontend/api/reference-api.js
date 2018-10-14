@@ -24,6 +24,16 @@ export function deleteReference (referenceId) {
     });
 }
 
+export function updateReference (reference) {
+    return fetch('/api/references/' + reference.id, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(reference)
+    }).then(result => result.json())
+}
+
 export function getReferenceTypes () {
     return fetch('/api/reference-types')
         .then(result => {

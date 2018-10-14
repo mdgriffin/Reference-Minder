@@ -1,16 +1,14 @@
 export function flatten (references) {
     return references.reduce((acc, reference) => {
-        let arr = [];
-
-        arr.push(reference.title);
-        arr.push(reference.authors.reduce((acc, author) => acc += author.name + ', ', ''));
-        arr.push(reference.pages.from)
-        arr.push(reference.pages.to)
-        arr.push(new Date(reference.date.year, reference.date.month, reference.date.day).toLocaleDateString("en-IE"))
-        arr.push(new Date(reference.dateAccessed.year, reference.dateAccessed.month, reference.dateAccessed.day).toLocaleDateString("en-IE"))
-        arr.push(reference.type? reference.type :  '')
-
-        acc.push(arr)
+        acc.push([
+            reference.title,
+            reference.authors.reduce((acc, author) => acc += author.name + ', ', ''),
+            reference.pages.from,
+            reference.pages.to,
+            new Date(reference.date).toLocaleDateString("en-IE"),
+            new Date(reference.dateAccessed).toLocaleDateString("en-IE"),
+            reference.type? reference.type :  ''
+        ]);
 
         return acc;
     }, [])
