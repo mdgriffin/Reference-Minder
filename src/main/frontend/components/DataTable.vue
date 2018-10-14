@@ -47,9 +47,9 @@
         </div>
         <div v-if="pagination" class="datatable-pagination alignMiddle-half">
             <ul class="pagination">
-                <li :class="[{disabled: currentPage === 0}, 'page-item']"><a @click="changePage(currentPage - 1)" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li :class="[{disabled: currentPage === 0}, 'page-item']"><button @click="changePage(currentPage - 1)" class="page-link btn" aria-label="Previous"><span aria-hidden="true">&laquo;</span></button></li>
                 <li v-for="page in numPages" :class="[{active: currentPage === (page - 1)}, 'page-item']"><a @click="changePage(page - 1)" class="page-link">{{page}}</a></li>
-                <li :class="[{disabled: currentPage === numPages - 1}, 'page-item']"><a @click="changePage(currentPage + 1)" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                <li :class="[{disabled: currentPage === numPages - 1}, 'page-item']"><button @click="changePage(currentPage + 1)" class="page-link btn" aria-label="Next"><span aria-hidden="true">&raquo;</span></button></li>
             </ul>
         </div>
     </footer>
@@ -221,5 +221,14 @@
 
 .datatable-indicator p {
     margin: 0;
+}
+
+.datatable-pagination .pagination {
+    margin: 0;
+    padding: 0;
+}
+
+.datatable-pagination .pagination li {
+    list-style: none;
 }
 </style>

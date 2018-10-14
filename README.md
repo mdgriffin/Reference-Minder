@@ -9,7 +9,8 @@ these tags enable the grouping of similar references.
 - [x] View listing of references
 - [x] Save Reference
 - [x] Tag Listing
-- [ ] Delete Reference
+- [x] Delete Reference
+- [x] Update Reference
 - [x] Reference Form Modal
 - [ ] Improve Design
 - [ ] Re-run MapReduce function when the data changes
