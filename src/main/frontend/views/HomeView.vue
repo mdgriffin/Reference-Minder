@@ -14,9 +14,8 @@
                     </template>
                 </data-table>
             </div>
-            <modal name="new-reference-form" transition="pop-out" :width="modalWidth" :height="modalHeight" :scrollable="modalScroll">
-                <reference-form :reference="emptyReference" @save="onSaveReference"></reference-form>
-            </modal>
+
+            <reference-form @save="onSaveReference"></reference-form>
             <button @click="showCreateForm" class="btn btn-large btn-secondary">Add Reference</button>
         </div>
   </div>
@@ -40,23 +39,8 @@ export default {
     },
     data() {
         return {
-            emptyReference: {
-                title: "",
-                type: "",
-                authors: [],
-                tags: [],
-                pages: {
-                    from: 20,
-                    to: 25
-                },
-                date: null,
-                dateAccessed: null
-            },
             referenceHeadings: ['Title', 'Authors', 'Pages From', 'Pages To', 'Date', 'Date Accessed', 'Type'],
-            numReferenceSaves: 0,
-            modalWidth: '60%',
-            modalHeight: 'auto',
-            modalScroll: true
+            numReferenceSaves: 0
         }
     },
     filters: {
@@ -101,10 +85,10 @@ export default {
                 })
         },
         updateReference (rowIndex) {
-            console.log('show update model for ' + rowIndex)
+            this.$modal.show('reference-form-modal', {reference: this.references[rowIndex]})
         },
         showCreateForm () {
-            this.$modal.show('new-reference-form')
+            this.$modal.show('reference-form-modal')
         }
     }
 }

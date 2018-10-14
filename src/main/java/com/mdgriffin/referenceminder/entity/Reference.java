@@ -17,9 +17,9 @@ public class Reference {
 
     private Date updatedAt;
 
-    private ReferenceDate date;
+    private Date date;
 
-    private ReferenceDate dateAccessed;
+    private Date dateAccessed;
 
     private PageRange pages;
 
@@ -69,19 +69,19 @@ public class Reference {
         this.updatedAt = updatedAt;
     }
 
-    public ReferenceDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(ReferenceDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public ReferenceDate getDateAccessed() {
+    public Date getDateAccessed() {
         return dateAccessed;
     }
 
-    public void setDateAccessed(ReferenceDate dateAccessed) {
+    public void setDateAccessed(Date dateAccessed) {
         this.dateAccessed = dateAccessed;
     }
 

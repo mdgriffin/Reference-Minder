@@ -27,9 +27,9 @@
         <tbody>
         <slot name="table-body" v-bind:rows="currentRows">
             <tr v-for="(row, rowIndex) in currentRows">
-                <slot name="before-data" v-bind:rowIndex="rowIndex"></slot>
+                <slot name="before-data" v-bind:rowIndex="rows.indexOf(row)"></slot>
                 <td v-for="item in row">{{item}}</td>
-                <slot name="after-data" v-bind:rowIndex="rowIndex" v-bind:rowData="row"></slot>
+                <slot name="after-data" v-bind:rowIndex="rows.indexOf(row)" v-bind:rowData="row"></slot>
                 </tr>
             </slot>
         </tbody>
