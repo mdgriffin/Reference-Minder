@@ -1,46 +1,38 @@
 <template>
-    <div class="home">
-        <div class="sidebar">
-            <h2>Tags</h2>
-            <tag-list :tags="tags"></tag-list>
+    <div class="referenceListView">
+        <header class="mainHeader">
+            <h2>References</h2>
+            <button @click="showCreateForm" class="btn btn-primary">Add Reference <i class="far fa-plus-square"></i></button>
+        </header>
+        <div v-if="references" class="card">
+            <data-table :headings="referenceHeadings" :rows="references | flattenReferences">
+                <template slot="after-data" slot-scope="{rowIndex}">
+                    <td>
+                        <button @click="updateReference(rowIndex)" class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
+                    </td>
+                    <td class="align-left">
+                        <button @click="deleteReference(rowIndex)" class="btn btn-secondary"><i class="fas fa-times"></i></button>
+                    </td>
+                </template>
+            </data-table>
         </div>
-        <div class="mainContent">
-            <header class="mainHeader">
-                <h2>References</h2>
-                <button @click="showCreateForm" class="btn btn-primary">Add Reference <i class="far fa-plus-square"></i></button>
-            </header>
-            <div v-if="references" class="card">
-                <data-table :headings="referenceHeadings" :rows="references | flattenReferences">
-                    <template slot="after-data" slot-scope="{rowIndex}">
-                        <td>
-                            <button @click="updateReference(rowIndex)" class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
-                        </td>
-                        <td class="align-left">
-                            <button @click="deleteReference(rowIndex)" class="btn btn-secondary"><i class="fas fa-times"></i></button>
-                        </td>
-                    </template>
-                </data-table>
-            </div>
-            <reference-form @save="onSaveReference"></reference-form>
-        </div>
-  </div>
+        <reference-form @save="onSaveReference"></reference-form>
+    </div>
 </template>
 
 <script>
 import ReferenceForm from '../components/ReferenceForm.vue';
 import ReferenceList from '../components/ReferenceList.vue';
 import DataTable from '../components/DataTable.vue';
-import TagList from "../components/TagList.vue";
 import {getReferences, getReferenceTags, saveReference, deleteReference, updateReference} from "../api/reference-api";
 import {flatten} from '../filters/references-filter.js'
 
 export default {
-    name: 'home-view',
+    name: 'references-view',
     components: {
         ReferenceForm,
         'reference-list': ReferenceList,
-        'data-table': DataTable,
-        TagList
+        'data-table': DataTable
     },
     data() {
         return {
@@ -54,14 +46,6 @@ export default {
         }
     },
     asyncComputed: {
-        tags: {
-            get () {
-                return getReferenceTags();
-            },
-            watch () {
-                this.numReferenceSaves;
-            }
-        },
         references: {
             get () {
                 return getReferences();

@@ -1,16 +1,37 @@
 <template>
     <div id="app" class="container">
-        <transition name="fade" mode="out-in">
-            <router-view class="view"></router-view>
-        </transition>
+        <div class="sidebar">
+            <h2>Tags</h2>
+            <tag-list :tags="tags"></tag-list>
+        </div>
+        <div class="mainContent">
+            <transition name="fade" mode="out-in">
+                <router-view class="view"></router-view>
+            </transition>
+        </div>
     </div>
 </template>
 
 <script>
+import {getReferenceTags} from "./api/reference-api";
+import TagList from "./components/TagList.vue";
 import './styles/global.scss'
 
 export default {
-    name: 'main-app'
+    name: 'main-app',
+    components: {
+        TagList
+    },
+    asyncComputed: {
+        tags: {
+            get() {
+                return getReferenceTags();
+            },
+            watch() {
+                this.numReferenceSaves;
+            }
+        }
+    }
 }
 </script>
 

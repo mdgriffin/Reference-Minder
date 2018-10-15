@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const HomeView = () => import('../views/HomeView.vue')
+const ReferencesView = () => import('../views/ReferencesView.vue')
 
 Vue.use(Router)
 
@@ -9,7 +9,8 @@ export function createRouter () {
     mode: 'history',
     fallback: false,
     routes: [
-      { path: '/', component: HomeView }
+      { path: '/', component: ReferencesView},
+      { path: '/tags/:tag', component: ReferencesView },
     ]
   })
 }
