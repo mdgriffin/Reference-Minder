@@ -59,6 +59,21 @@
     import VueTagsInput from '@johmun/vue-tags-input';
     import Datepicker from 'vuejs-datepicker';
     import {getReferenceTypes} from "../api/reference-api";
+
+    const blankReference = {
+        title: "",
+        type: "",
+        authors: [],
+        tags: [],
+        pages: {
+            from: 20,
+            to: 25
+        },
+        date: new Date(),
+        dateAccessed: new Date()
+    };
+
+
     export default {
         name: 'reference-form',
         components: {
@@ -68,18 +83,7 @@
         data () {
             return {
                 tag: '',
-                formReference:  {
-                    title: "",
-                    type: "",
-                    authors: [],
-                    tags: [],
-                    pages: {
-                        from: 20,
-                        to: 25
-                    },
-                    date: new Date(),
-                    dateAccessed: new Date()
-                },
+                formReference: JSON.parse(JSON.stringify(blankReference)),
                 modalWidth: '60%',
                 modalHeight: 'auto',
                 modalScroll: true
@@ -114,6 +118,8 @@
             beforeOpen (event) {
                 if (event.params && event.params.reference) {
                     this.formReference = JSON.parse(JSON.stringify(event.params.reference))
+                } else {
+                    this.formReference = JSON.parse(JSON.stringify(blankReference))
                 }
             }
         }
