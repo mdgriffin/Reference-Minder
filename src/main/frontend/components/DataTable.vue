@@ -20,7 +20,7 @@
         <thead class="thead-light">
         <tr>
             <slot name="before-headings"></slot>
-            <th v-for="item, itemIndex in headings">{{item}} <button v-if="columnSorting" class="btn btn-clear" @click="sortColumn(itemIndex)"><i :class="['fas', sortButtonClass(itemIndex)]"></i></button></th>
+            <th v-for="item, itemIndex in headings">{{item}} <button v-if="columnSorting" class="btn btn-clear btn-small" @click="sortColumn(itemIndex)"><i :class="['fas', sortButtonClass(itemIndex)]"></i></button></th>
             <slot name="after-headings"></slot>
             </tr>
         </thead>
