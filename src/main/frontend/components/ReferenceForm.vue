@@ -14,26 +14,25 @@
                         <option v-for="(typeKey, typeVal) in referenceTypes" :value="typeVal" :key="typeKey">{{typeKey}}</option>
                     </select>
                 </div>
-                <h3>Authors</h3>
+                <h4>Authors</h4>
                 <div class="referenceForm-authors">
                     <div v-for="(author, authorIndex) in formReference.authors" :key="authorIndex">
                         <div class="form-group">
                             <label class="form-label">Author {{authorIndex + 1}} Name:</label>
                             <input type="text" class="form-input" v-model="formReference.authors[authorIndex].name">
-                            <button @click="removeAuthor(authorIndex)"><i class="fas fa-times"></i></button>
+                            <button @click="removeAuthor(authorIndex)" class="btn btn-small"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
-                    <button @click="addAuthor">Add Author <i class="fas fa-plus"></i></button>
+                    <button @click="addAuthor" class="btn btn-secondary">Add Author <i class="fas fa-plus"></i></button>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Date</label>
-                    <datepicker v-model="formReference.date"></datepicker>
+                    <datepicker v-model="formReference.date" :input-class="'form-input'"></datepicker>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Date Accessed</label>
-                    <datepicker v-model="formReference.dateAccessed"></datepicker>
+                    <datepicker v-model="formReference.dateAccessed" :input-class="'form-input'"></datepicker>
                 </div>
-                <h3>Page Range</h3>
                 <div class="form-group">
                     <label class="form-label">Page From</label>
                     <input type="text" class="form-input" v-model="formReference.pages.from">
@@ -50,7 +49,7 @@
                             @tags-changed="onTagsChanged"
                     />
                 </div>
-                <button @click="saveReference" class="btn btn-large btn-secondary">Save</button>
+                <button @click="saveReference" class="btn btn-large btn-primary">Save <i class="fas fa-save"></i></button>
             </div>
         </div>
     </modal>

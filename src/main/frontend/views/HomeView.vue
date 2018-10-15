@@ -4,19 +4,24 @@
             <h2>Tags</h2>
             <tag-list :tags="tags"></tag-list>
         </div>
-        <div class="content">
-            <h2>References</h2>
-            <div v-if="references">
+        <div class="mainContent">
+            <header class="mainHeader">
+                <h2>References</h2>
+                <button @click="showCreateForm" class="btn btn-primary">Add Reference <i class="far fa-plus-square"></i></button>
+            </header>
+            <div v-if="references" class="card">
                 <data-table :headings="referenceHeadings" :rows="references | flattenReferences">
                     <template slot="after-data" slot-scope="{rowIndex}">
-                        <button @click="updateReference(rowIndex)" class="btn btn-secondary">Update</button>
-                        <button @click="deleteReference(rowIndex)" class="btn btn-secondary"><i class="fas fa-times"></i></button>
+                        <td>
+                            <button @click="updateReference(rowIndex)" class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
+                        </td>
+                        <td class="align-left">
+                            <button @click="deleteReference(rowIndex)" class="btn btn-secondary"><i class="fas fa-times"></i></button>
+                        </td>
                     </template>
                 </data-table>
             </div>
-
             <reference-form @save="onSaveReference"></reference-form>
-            <button @click="showCreateForm" class="btn btn-large btn-secondary">Add Reference</button>
         </div>
   </div>
 </template>
