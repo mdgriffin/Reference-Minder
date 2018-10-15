@@ -45,13 +45,19 @@ export default {
             return flatten(references);
         }
     },
+    watch: {
+
+    },
     asyncComputed: {
         references: {
             get () {
+                var tag = this.$route.params.tag
+                console.log('getting refereces for tag: ' + tag)
                 return getReferences();
             },
             watch () {
                 this.numReferenceSaves;
+                this.$route.params.tag;
             }
         }
     },
