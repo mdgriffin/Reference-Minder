@@ -47,9 +47,9 @@
         </div>
         <div v-if="pagination" class="datatable-pagination alignMiddle-half">
             <ul class="pagination">
-                <li :class="[{disabled: currentPage === 0}, 'page-item']"><button @click="changePage(currentPage - 1)" class="page-link btn" aria-label="Previous"><i class="fas fa-angle-double-left" aria-hidden="true"></i></button></li>
+                <li class="page-item"><button :disabled="currentPage === 0" @click="changePage(currentPage - 1)" class="page-link btn" aria-label="Previous"><i class="fas fa-angle-double-left" aria-hidden="true"></i></button></li>
                 <li v-for="page in numPages" :class="[{active: currentPage === (page - 1)}, 'page-item']"><a @click="changePage(page - 1)" class="page-link btn btn-clear">{{page}}</a></li>
-                <li :class="[{disabled: currentPage === numPages - 1}, 'page-item']"><button @click="changePage(currentPage + 1)" class="page-link btn" aria-label="Next"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button></li>
+                <li class="page-item"><button :disabled="currentPage === numPages - 1" @click="changePage(currentPage + 1)" class="page-link btn" aria-label="Next"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button></li>
             </ul>
         </div>
     </footer>
@@ -57,6 +57,10 @@
 </template>
 
 <script>
+    function escapeRegExp (text) {
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    }
+
     export default {
         props: {
             headings: {
@@ -119,7 +123,7 @@
             },
             filterRows: function (rows) {
                 if (this.searchInput.length > 0) {
-                    var escapedInputText = Util.escapeRegExp(this.searchInput.toLowerCase());
+                    var escapedInputText = escapeRegExp(this.searchInput.toLowerCase());
                     return rows.filter(function (row) {
                         return Object.keys(row).filter(function (key) {
                             var colVal = String(row[key]);
