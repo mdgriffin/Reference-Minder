@@ -17,4 +17,6 @@ public interface ReferenceService {
 
     Reference updateReference (Reference reference);
 
+    List<Reference> getReferencesTaggedWith (List<String> tags);
+
 }

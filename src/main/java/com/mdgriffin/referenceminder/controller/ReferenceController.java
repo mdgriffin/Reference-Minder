@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Ref;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,12 @@ public class ReferenceController {
     @GetMapping("/references")
     public List<Reference> getReferences(){
         return referenceService.getReferences();
+    }
+
+    // TODO: Figure out how to use the same get mapping
+    @GetMapping("/tag-references")
+    public List<Reference> getReferencesByTag(@RequestParam("tag") String tag){
+        return referenceService.getReferencesTaggedWith(Arrays.asList(tag));
     }
 
     @GetMapping("/references/{referenceId}")
