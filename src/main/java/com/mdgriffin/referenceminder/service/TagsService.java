@@ -8,4 +8,6 @@ public interface TagsService {
 
     List<TagCount> getTags ();
 
+    void updateTagCount ();
+
 }

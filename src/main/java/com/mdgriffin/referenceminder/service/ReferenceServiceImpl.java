@@ -20,6 +20,9 @@ public class ReferenceServiceImpl implements ReferenceService {
     ReferenceRepository referenceRepository;
 
     @Autowired
+    TagsService tagsService;
+
+    @Autowired
     MongoTemplate mongoTemplate;
 
     @Override
@@ -28,32 +31,38 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
+    public Optional<Reference> findById(String id) {
+        return referenceRepository.findById(id);
+    }
+
+    @Override
+    public List<Reference> getReferencesTaggedWith(List<String> tags) {
+        return  mongoTemplate.find(new Query(Criteria.where("tags.text").in(tags)), Reference.class);
+    }
+
+    @Override
     public Reference saveReference(Reference reference) {
         reference.setCreatedAt(new Date());
         reference.setUpdatedAt(new Date());
+
+        tagsService.updateTagCount();
+
         return referenceRepository.save(reference);
     }
 
     @Override
     public void deleteReference(String referenceId) {
         referenceRepository.deleteById(referenceId);
-    }
-
-    @Override
-    public Optional<Reference> findById(String id) {
-        return referenceRepository.findById(id);
+        tagsService.updateTagCount();
     }
 
     @Override
     public Reference updateReference(Reference reference) {
         reference.setUpdatedAt(new Date());
-        return referenceRepository.save(reference);
-    }
 
-    @Override
-    public List<Reference> getReferencesTaggedWith(List<String> tags) {
-        // db.getCollection('reference').find({"tags.text": {$in: ["design"] }})
-        return  mongoTemplate.find(new Query(Criteria.where("tags.text").in(tags)), Reference.class);
+        tagsService.updateTagCount();
+
+        return referenceRepository.save(reference);
     }
 
 }
