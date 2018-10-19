@@ -6,6 +6,7 @@ export function getReferences () {
 }
 
 export function getReferencesByTag (tag) {
+    console.log('Getting References for tag ' + tag)
     return fetch('/api/references?tag=' + tag)
         .then(result => {
             return result.json()
