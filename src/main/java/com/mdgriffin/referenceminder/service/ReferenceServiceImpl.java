@@ -45,9 +45,11 @@ public class ReferenceServiceImpl implements ReferenceService {
         reference.setCreatedAt(new Date());
         reference.setUpdatedAt(new Date());
 
+        Reference savedReference =  referenceRepository.save(reference);
+
         tagsService.updateTagCount();
 
-        return referenceRepository.save(reference);
+        return savedReference;
     }
 
     @Override
@@ -60,9 +62,11 @@ public class ReferenceServiceImpl implements ReferenceService {
     public Reference updateReference(Reference reference) {
         reference.setUpdatedAt(new Date());
 
+        Reference savedReference =  referenceRepository.save(reference);
+
         tagsService.updateTagCount();
 
-        return referenceRepository.save(reference);
+        return savedReference;
     }
 
 }

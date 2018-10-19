@@ -9,7 +9,7 @@
         </div>
         <div class="mainContent">
             <transition name="fade" mode="out-in">
-                <router-view class="view"></router-view>
+                <router-view class="view" @referencesChanged="onReferencesChanged"></router-view>
             </transition>
         </div>
     </div>
@@ -25,14 +25,25 @@ export default {
     components: {
         TagList
     },
+    data() {
+        return {
+            referenceChanges: 0
+        }
+    },
     asyncComputed: {
         tags: {
             get() {
                 return getReferenceTags();
             },
             watch() {
-                this.numReferenceSaves;
+                this.referenceChanges;
             }
+        }
+    },
+    methods: {
+        onReferencesChanged () {
+            this.referenceChanges++;
+            console.log('references have changed')
         }
     }
 }
