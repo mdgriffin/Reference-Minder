@@ -25,7 +25,7 @@ public class ReferenceController {
     }
 
     // TODO: Figure out how to use the same get mapping
-    @GetMapping("/tag-references")
+    @GetMapping(value = "/references", params = "tag")
     public List<Reference> getReferencesByTag(@RequestParam("tag") String tag){
         return referenceService.getReferencesTaggedWith(Arrays.asList(tag));
     }
