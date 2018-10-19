@@ -24,7 +24,7 @@
 import ReferenceForm from '../components/ReferenceForm.vue';
 import ReferenceList from '../components/ReferenceList.vue';
 import DataTable from '../components/DataTable.vue';
-import {getReferences, getReferenceTags, saveReference, deleteReference, updateReference} from "../api/reference-api";
+import {getReferences, getReferencesByTag, getReferenceTags, saveReference, deleteReference, updateReference} from "../api/reference-api";
 import {flatten} from '../filters/references-filter.js'
 
 export default {
@@ -51,9 +51,13 @@ export default {
     asyncComputed: {
         references: {
             get () {
-                var tag = this.$route.params.tag
-                console.log('getting refereces for tag: ' + tag)
-                return getReferences();
+                var tag = this.$route.params.tag;
+
+                if (tag !== undefined && tag.length > 0) {
+                    return getReferencesByTag(tag);
+                } else {
+                    return getReferences();
+                }
             },
             watch () {
                 this.numReferenceSaves;

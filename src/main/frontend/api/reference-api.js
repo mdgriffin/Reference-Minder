@@ -5,6 +5,13 @@ export function getReferences () {
         })
 }
 
+export function getReferencesByTag (tag) {
+    return fetch('/api/references?tag=' + tag)
+        .then(result => {
+            return result.json()
+        })
+}
+
 export function saveReference (reference) {
     return fetch('/api/references', {
         method: 'POST',
