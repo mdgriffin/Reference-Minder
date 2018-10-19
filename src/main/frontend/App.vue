@@ -1,7 +1,10 @@
 <template>
     <div id="app" class="container">
         <div class="sidebar">
-            <h2>Tags</h2>
+            <div class="logo">
+                <h1>Reference Minder</h1>
+            </div>
+            <h3>Tags</h3>
             <tag-list :tags="tags"></tag-list>
         </div>
         <div class="mainContent">

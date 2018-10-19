@@ -51,7 +51,12 @@ h1, h2, h3, h4, h5 {
     border-right: 1px solid #f4f4f4;
 }
 
-.sidebar h2 {
+.sidebar .logo {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.sidebar h1,
+.sidebar h3 {
     margin-left: 1rem;
     margin-right: 1rem;
 }
