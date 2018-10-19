@@ -1,6 +1,7 @@
 <template>
 <div class="tagList">
     <ul>
+        <li><router-link to="/">All References  <i class="fas fa-tags"></i></router-link></li>
         <li v-for="tag in tags">
             <router-link :to="'/tags/' + tag.name">{{tag.name}} ({{tag.value}})</router-link>
         </li>
