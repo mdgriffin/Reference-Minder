@@ -1,9 +1,10 @@
 @import 'variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat');
 
  body {
     background: #f4f4f4;
-     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-     margin: 0;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
 }
 
 html {
@@ -53,6 +54,11 @@ h1, h2, h3, h4, h5 {
 
 .sidebar .logo {
     border-bottom: 1px solid #eaeaea;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.sidebar .logo-firstLetter {
+    color: $primary_colour;
 }
 
 .sidebar h1,

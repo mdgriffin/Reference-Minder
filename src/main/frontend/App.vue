@@ -2,7 +2,7 @@
     <div id="app" class="container">
         <div class="sidebar">
             <div class="logo">
-                <h1>Reference Minder</h1>
+                <h1><span class="logo-firstLetter">R</span>eference <span class="logo-firstLetter">M</span>inder</h1>
             </div>
             <h3>Tags</h3>
             <tag-list :tags="tags"></tag-list>
