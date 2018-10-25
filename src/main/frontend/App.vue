@@ -43,7 +43,6 @@ export default {
     methods: {
         onReferencesChanged () {
             this.referenceChanges++;
-            console.log('references have changed')
         }
     }
 }

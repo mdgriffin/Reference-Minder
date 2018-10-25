@@ -79,6 +79,9 @@ export default {
                         this.numReferenceSaves++;
                     })
             }
+
+
+            this.$modal.hide('reference-form-modal')
         },
         deleteReference (rowIndex) {
             deleteReference(this.references[rowIndex].id)
