@@ -2,7 +2,7 @@
     <modal name="reference-form-modal" transition="pop-out" :width="modalWidth" :height="modalHeight" :scrollable="modalScroll" @before-open="beforeOpen">
         <div class="referenceFormModal">
             <div v-if="formReference">
-                <h2>{{ (formReference.id? 'Add' : 'Create') }} Reference</h2>
+                <h2>{{ (formReference.id? 'Update' : 'Add') }} Reference</h2>
                 <div class="form-group">
                     <label class="form-label">Title</label>
                     <input type="text" class="form-input form-input-fullWidth" v-model="formReference.title">
@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label class="form-label">Author {{authorIndex + 1}} Name:</label>
                             <input type="text" class="form-input" v-model="formReference.authors[authorIndex].name">
-                            <button @click="removeAuthor(authorIndex)" class="btn"><i class="fas fa-times"></i></button>
+                            <button @click="removeAuthor(authorIndex)" class="btn btn-warning"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
                     <button @click="addAuthor" class="btn btn-secondary">Add Author <i class="fas fa-plus"></i></button>

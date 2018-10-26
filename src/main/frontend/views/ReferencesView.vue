@@ -8,15 +8,22 @@
             <data-table :headings="referenceHeadings" :rows="references | flattenReferences">
                 <template slot="after-data" slot-scope="{rowIndex}">
                     <td>
-                        <button @click="updateReference(rowIndex)" class="btn btn-secondary">Update <i class="fas fa-edit"></i></button>
+                        <button @click="updateReference(rowIndex)" class="btn btn-secondary" title="Update Reference">Update <i class="fas fa-edit"></i></button>
                     </td>
                     <td class="align-left">
-                        <button @click="deleteReference(rowIndex)" class="btn btn-secondary"><i class="fas fa-times"></i></button>
+                        <button @click="deleteReference(rowIndex)" class="btn btn-warning" title="Delete Reference"><i class="fas fa-times"></i></button>
                     </td>
                 </template>
             </data-table>
         </div>
         <reference-form @save="onSaveReference"></reference-form>
+
+        <modal name="delete-successful-modal" transition="pop-out" :height="'auto'" @before-open="beforeOpenDeleteSuccessful">
+            <div class="messageModal messageModal-success">
+                <h3><i class="fas fa-clipboard-check"></i> Reference Deleted Successfully</h3>
+            </div>
+
+        </modal>
     </div>
 </template>
 
@@ -84,20 +91,30 @@ export default {
             this.$modal.hide('reference-form-modal')
         },
         deleteReference (rowIndex) {
-            deleteReference(this.references[rowIndex].id)
-                .then(res => {
-                    this.numReferenceSaves++;
-                    this.$emit('referencesChanged');
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            if (confirm("Are you sure you want to delete this reference?")) {
+                deleteReference(this.references[rowIndex].id)
+                    .then(res => {
+                        this.numReferenceSaves++;
+                        this.$modal.show('delete-successful-modal')
+                        this.$emit('referencesChanged');
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            } else {
+                this.$modal.show('delete-successful-modal')
+            }
         },
         updateReference (rowIndex) {
             this.$modal.show('reference-form-modal', {reference: this.references[rowIndex]})
         },
         showCreateForm () {
             this.$modal.show('reference-form-modal')
+        },
+        beforeOpenDeleteSuccessful () {
+            setTimeout(() => {
+                this.$modal.hide('delete-successful-modal')
+            }, 2000)
         }
     }
 }

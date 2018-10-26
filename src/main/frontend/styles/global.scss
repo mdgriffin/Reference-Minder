@@ -194,6 +194,11 @@ a.btn {
     border: 1px solid #f4f4f4;
 }
 
+.btn-warning {
+  background: #ff3d23;
+  color: #fff;
+}
+
 .btn-small {
     padding: 0.7em;
     font-size: 0.8em;
@@ -228,4 +233,19 @@ a.btn {
 .table {
     text-align: left;
     width: 100%;
+}
+
+.messageModal {
+  padding: 1em;
+  text-align: center;
+}
+
+.messageModal h3 i {
+  font-size: 3em;
+  vertical-align: middle;
+  margin-right: 0.25em;
+}
+
+.messageModal-success h3 i {
+  color: #48db45;
 }
