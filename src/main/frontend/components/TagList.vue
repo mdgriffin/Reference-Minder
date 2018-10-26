@@ -3,7 +3,7 @@
     <ul>
         <li><router-link to="/">All References  <i class="fas fa-tags"></i></router-link></li>
         <li v-for="tag in tags">
-            <router-link :to="'/tags/' + tag.name">{{tag.name}} ({{tag.value}})</router-link>
+            <router-link :to="'/tags/' + tag.name">{{tag.name}} ({{tag.value | toInt }})</router-link>
         </li>
     </ul>
 </div>
@@ -12,7 +12,12 @@
 <script>
 export default {
     name: 'tag-list',
-    props: ['tags']
+    props: ['tags'],
+    filters: {
+        toInt (value) {
+            return parseInt(value)
+        }
+    }
 }
 </script>
 
