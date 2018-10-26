@@ -2,17 +2,21 @@
     <modal name="reference-form-modal" transition="pop-out" :width="modalWidth" :height="modalHeight" :scrollable="modalScroll" @before-open="beforeOpen">
         <div class="referenceFormModal">
             <div v-if="formReference">
-                <h2>Reference Form</h2>
+                <h2>{{ (formReference.id? 'Add' : 'Create') }} Reference</h2>
                 <div class="form-group">
                     <label class="form-label">Title</label>
-                    <input type="text" class="form-input" v-model="formReference.title">
+                    <input type="text" class="form-input form-input-fullWidth" v-model="formReference.title">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Reference Types</label>
-                    <select v-model="formReference.type">
+                    <select v-model="formReference.type" class="form-select">
                         <option disabled value="">Please select one</option>
                         <option v-for="(typeKey, typeVal) in referenceTypes" :value="typeVal" :key="typeKey">{{typeKey}}</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">URL</label>
+                    <input type="text" class="form-input form-input-fullWidth" v-model="formReference.url">
                 </div>
                 <h4>Authors</h4>
                 <div class="referenceForm-authors">
@@ -20,7 +24,7 @@
                         <div class="form-group">
                             <label class="form-label">Author {{authorIndex + 1}} Name:</label>
                             <input type="text" class="form-input" v-model="formReference.authors[authorIndex].name">
-                            <button @click="removeAuthor(authorIndex)" class="btn btn-small"><i class="fas fa-times"></i></button>
+                            <button @click="removeAuthor(authorIndex)" class="btn"><i class="fas fa-times"></i></button>
                         </div>
                     </div>
                     <button @click="addAuthor" class="btn btn-secondary">Add Author <i class="fas fa-plus"></i></button>
@@ -66,9 +70,10 @@
         authors: [],
         tags: [],
         pages: {
-            from: 20,
-            to: 25
+            from: 0,
+            to: 0
         },
+        url: "",
         date: new Date(),
         dateAccessed: new Date()
     };
@@ -127,9 +132,13 @@
 </script>
 
 <style>
-    .referenceFormModal {
-        background: #fff;
-        overflow: scroll;
-        padding: 2em;
-    }
+.referenceFormModal {
+    background: #fff;
+    overflow: scroll;
+    padding: 2em;
+}
+
+.referenceFormModal h2 {
+    margin-top: 0;
+}
 </style>

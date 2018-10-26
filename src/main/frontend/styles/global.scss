@@ -110,8 +110,40 @@ ul.reset {
 
 .form-input {
     font-size: 1.2em;
-    line-height: 1.2em;
+    line-height: 1.6em;
     border: 1px solid #eaeaea;
+    border-bottom: 3px solid #c4c4c4;
+    color: #616161;
+}
+
+.form-input-fullWidth {
+    width: 100%;
+    display: block;
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom: 3px solid darken(#c4c4c4, 20);
+}
+
+.form-select {
+    font-size: 1.2em;
+    border: 1px solid #eaeaea;
+    border-bottom: 3px solid #c4c4c4;
+    height: 2.2em;
+}
+
+.vue-tags-input {
+    font-size: 1.2em !important;
+}
+
+.new-tag-input {
+    font-size: 1em !important;
+}
+
+.vue-tags-input .input {
+    border: 1px solid #eaeaea !important;
+    border-bottom: 3px solid #c4c4c4 !important;
 }
 
 .fullWidth {
