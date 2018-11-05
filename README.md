@@ -4,6 +4,21 @@ Reference Minder is a reference management web application. It supports saving a
 a reference including title, date, date accessed, authors and reference type. Additionally, references can be tagged and
 these tags enable the grouping of similar references.
 
+
+### Installing and Running
+
+Installing dependencies and building:
+
+````
+mvn clean install
+````
+
+Running:
+
+````
+mvn spring-boot:run
+````
+
 ### To-Do
 
 - [x] View listing of references
