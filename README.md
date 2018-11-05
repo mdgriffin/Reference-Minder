@@ -7,6 +7,19 @@ these tags enable the grouping of similar references.
 
 ### Installing and Running
 
+Installing frontend build tools:
+
+````
+npm install
+````
+
+Running webpack and rebuilding when files change:
+
+````
+npm run auto-build
+
+````
+
 Installing dependencies and building:
 
 ````
