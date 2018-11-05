@@ -12,5 +12,5 @@ these tags enable the grouping of similar references.
 - [x] Delete Reference
 - [x] Update Reference
 - [x] Reference Form Modal
-- [ ] Improve Design
-- [ ] Re-run MapReduce function when the data changes
+- [x] Improve Design
+- [x] Re-run MapReduce function when the data changes
